@@ -85,7 +85,6 @@ class Shopify:
             if date_.match_date() == True:
                 activity=r[2].split('\n')[1]
                 WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.LINK_TEXT,r[1]))).click()
-                #WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.XPATHT,'//*[@id="AppFrameMain"]/div/div/div[2]/div/section[1]/div[3]/p[1]/a'))).click()
                 element=self.driver.find_element_by_xpath('//*[@id="AppFrameMain"]/div/div/div[2]/div/section[1]/div[3]/p[1]/a')
                 list_activity[activity].append(element.text)
                 self.driver.execute_script("window.history.go(-1)")
@@ -93,7 +92,6 @@ class Shopify:
             else:
                 finish=True
                 break 
-        print(list_activity)
         return list_activity
         
     def open_workplace(self):
@@ -103,6 +101,4 @@ class Shopify:
         self.view_history()
         email_pair=self.get_email()
         return email_pair
-        #WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located((By.CLASS_NAME, "identity-card identity-card--clickable"))).click()
-        #WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located((By.CLASS_NAME, "FeTD8"))).click()
    
