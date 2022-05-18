@@ -36,27 +36,17 @@ class Shopify:
         self.username=config('SHOPIFY_USERNAME')
         self.password=config('SHOPIFY_PASSWORD')
         self.driver.refresh()
-        #time.sleep(5)
         self.driver.find_element_by_id("account_email").send_keys(self.username)
-        #time.sleep(5)
         self.submit()
         print("entered email id")
         self.driver.switch_to.frame(0)
         print("switched frame")
-        #WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.XPATH,"//button[text()='Next']"))).click()
-        #button = self.driver.find_element_by_name("commit")
-        #ActionChains(self.driver).move_to_element(button).click(button).perform()
-        #self.driver.find_element_by_xpath("//button[text()='Next']").click()
-        #Next.click()
-
-        #self.driver.wait.until(EC.element_to_be_clickable((By.XPATH, "myXpath"))).click()
-        #self.driver.find_element_by_name("commit").click()
         time.sleep(3)
         self.driver.find_element_by_id("account_password").send_keys(self.password)
         self.submit()
         self.driver.switch_to.default_content()
-        #time.sleep(3000)
         return
+    
     @retry((ElementNotInteractableException,ElementNotVisibleException,ElementClickInterceptedException),3,3)
     def click_link(self):
         WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.LINK_TEXT,"PicAmaze Animate Images, Gifs"))).click()
@@ -64,27 +54,6 @@ class Shopify:
         time.sleep(5)
     def view_history(self):
         WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.LINK_TEXT,"View all history"))).click()
-    # def get_email(self):
-    #     #r = requests.get('https://partners.shopify.com/1451076/apps/3932647/history')
-    #     #soup = BeautifulSoup(r.text, "html.parser")
-    #     with Session() as s:
-    #         site = s.get("https://partners.shopify.com/1451076/apps/3932647/history")
-    #         print("this is a site")
-    #         print(site)
-    #         bs_content = BeautifulSoup(site.content, "html.parser")
-    #         print("site captured successfully!")
-    #         print(bs_content)
-    #         token = bs_content.find("input", {"name":"csrf_token"})["value"]
-    #         login_data = {"username":self.username,"password":self.password, "csrf_token":token}
-    #         s.post("https://partners.shopify.com/1451076/apps/3932647/history", login_data)
-    #         home_page = s.get("https://partners.shopify.com/1451076/apps/3932647/history")
-    #         print(home_page.content)
-        #table = soup.find('table', class_='Polaris-DataTable__Table_2qj3m')
-        #print(table)
-        # for row in table.tbody.find_all('tr'):
-        #     # Find all data for each column
-        #     columns = row.find_all('td')
-        #     print(columns)
 
     def get_email(self):
         time.sleep(5)
@@ -126,36 +95,7 @@ class Shopify:
                 break 
         print(list_activity)
         return list_activity
-        # print("hi")
-        # aftertd_XPath = "]/td["
-        # aftertr_XPath = "]"
-        # before_XPath = ".//table[@class='Polaris-DataTable__TableRow_1a85o']/tbody/tr["
-        # rows = len(self.driver.find_elements_by_xpath("//table/tbody/tr[2]/td"))
-        # # print (rows)
-        # columns = len(self.driver.find_elements_by_xpath(".//table[@class='Polaris-DataTable__TableRow_1a85o']/tbody/tr[2]/td"))
-        # # print(columns)
         
-        # # print("Company"+"               "+"Contact"+"               "+"Country")
-        # print(rows,columns)
-        # for t_row in range(2, (rows + 1)):
-        #     for t_column in range(1, (columns + 1)):
-        #         FinalXPath = before_XPath + str(t_row) + aftertd_XPath + str(t_column) + aftertr_XPath
-        #         print("hello")
-        #         cell_text = self.driver.find_element_by_xpath(FinalXPath).text
-        #         # print(cell_text, end = '               ')
-        #         print(cell_text)
-        #     print()  
-
-
-
-        # time.sleep(5)
-        # table_id = self.driver.find_element(By.XPATH, '//table[@class="Polaris-DataTable__Table_2qj3m"]')
-        # rows = table_id.find_elements(By.TAG_NAME, "tr") # get all of the rows in the table
-        # print(rows)
-        # for row in rows:
-        #     # Get the columns (all the column 2)        
-        #     col = row.find_elements(By.TAG_NAME, "td")[1] #note: index start from 0, 1 is col 2
-        #     print(col.text)#prints text from the element
     def open_workplace(self):
         self.driver.find_element_by_xpath("//span[contains(text(),'Propero')]").click()
         time.sleep(5)
@@ -165,10 +105,4 @@ class Shopify:
         return email_pair
         #WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located((By.CLASS_NAME, "identity-card identity-card--clickable"))).click()
         #WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located((By.CLASS_NAME, "FeTD8"))).click()
-    '''
-    def login(self):
-        self.driver.execute_script("window.promptResponse=prompt('Enter username','smth')")
-        a = self.driver.execute_script("var win = this.browserbot.getUserWindow(); return win.promptResponse")
-        self.driver.find_element_by_id("account_email").send_keys(a)
-        WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.XPATH,"//button[text()='Next']"))).click()
-    '''
+   
