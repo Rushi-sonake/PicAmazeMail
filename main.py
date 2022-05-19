@@ -20,7 +20,6 @@ def main():
         print(mail_to)
         subject='Let’s stay in touch!'
         mail=SendEmail('lokendra@propero.in')
-        subject="Thank you for joining our club"
         file=None
         msg=mail.create_msg(file,installation_mail,subject)
         mail.send_mail(msg)
@@ -29,7 +28,6 @@ def main():
         print(mail_to)
         subject="Canceled?"
         mail=SendEmail('lokendra@propero.in')
-        subject="Thank you for joining our club"
         file=None
         msg=mail.create_msg(file,installation_mail,subject)
         mail.send_mail(msg)
