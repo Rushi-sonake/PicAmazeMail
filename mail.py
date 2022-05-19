@@ -23,6 +23,7 @@ class SendEmail:
         message =MIMEMultipart('alternative')
         message.attach(MIMEText(msg_html,_subtype='html'))
         msgRoot.attach(message)
+        return msgRoot
     
     def send_mail(self,msgRoot):
         with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
