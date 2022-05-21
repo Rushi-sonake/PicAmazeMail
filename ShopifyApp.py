@@ -1,12 +1,12 @@
-from decouple import config
+#from decouple import config
+import click
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
-from webdriver_manager.chrome import ChromeDriverManager
+#from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.action_chains import ActionChains
 import time
-from bs4 import BeautifulSoup
 from requests import Session
 import sys
 from retry import retry
@@ -17,15 +17,19 @@ from selenium.common.exceptions import (
     ElementClickInterceptedException,
     ElementNotVisibleException,
 )
+from RPA.Robocorp.Vault import Vault
+
+secret= Vault().get_secret("Config")
+
 class Shopify:
     def __init__(self):
         options = webdriver.ChromeOptions()
         options.add_experimental_option("detach", True)
         options.add_experimental_option("useAutomationExtension", False)
         options.add_experimental_option("excludeSwitches",["enable-automation"])
-        self.driver = webdriver.Chrome(executable_path=r"C:\Users\H P\.wdm\drivers\chromedriver\win32\100.0.4896.60\chromedriver.exe", chrome_options=options)
+        self.driver = webdriver.Chrome(executable_path=r"chromedriver.exe", chrome_options=options)
     def open_login_window(self):
-        website=config('SHOPIFY_WEBSITE')
+        website="https://accounts.shopify.com/lookup?rid=05dc5f57-2da6-45ad-9fc8-a172078a9a9e"
         self.driver.get("https://partners.shopify.com/organizations")
         #driver = webdriver.Chrome(ChromeDriverManager().install())
     @retry((ElementNotInteractableException,ElementNotVisibleException,ElementClickInterceptedException),3,3)
@@ -33,8 +37,8 @@ class Shopify:
         submit = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.NAME, 'commit')))
         submit.click()
     def login(self):
-        self.username=config('SHOPIFY_USERNAME')
-        self.password=config('SHOPIFY_PASSWORD')
+        self.username=secret['Loginid']
+        self.password=secret['password']
         self.driver.refresh()
         self.driver.find_element_by_id("account_email").send_keys(self.username)
         self.submit()
@@ -101,4 +105,5 @@ class Shopify:
         self.view_history()
         email_pair=self.get_email()
         return email_pair
+   
    
