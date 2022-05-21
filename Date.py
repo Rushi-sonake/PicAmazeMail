@@ -1,36 +1,35 @@
-from datetime import date
+from datetime import *
 import datetime
+#from numpy import true_divide
 
-from numpy import true_divide
 class Date_:
     def __init__(self,date):
         self.date=date
     def find_month(self,month):
-        match month:
-            case 'January':
-                return 1
-            case 'February':
-                return 2
-            case 'March':
-                return 3
-            case 'April':
-                return 4
-            case 'May':
-                return 5
-            case 'June':
-                return 6
-            case 'July':
-                return 7
-            case 'August':
-                return 8
-            case 'September':
-                return 9
-            case 'October':
-                return 10
-            case 'November':
-                return 11
-            case 'December':
-                return 12
+        if month=='January':
+            return 1
+        if month=='February':
+            return 2
+        if month=='March':
+            return 3
+        if month=='April':
+            return 4
+        if month=='May':
+            return 5
+        if month=='June':
+            return 6
+        if month=='July':
+            return 7
+        if month=='August':
+            return 8
+        if month=='September':
+            return 9
+        if month=='October':
+            return 10
+        if month=='November':
+            return 11
+        if month=='December':
+            return 12
     def convert_date_in_numbers(self):
         month=self.date.split(' ',1)[0]
         self.month=self.find_month(month)
@@ -46,4 +45,5 @@ class Date_:
             return True
         else:
             return False 
+        
         
