@@ -37,13 +37,17 @@ class Date_:
         self.day=int(temp[0].split(' ')[1])
         self.year=int(temp[1].split(' ')[0])
     def match_date(self):
-        today = str(date.today())
+        yesterday=date.today() - timedelta(days = 1)
+        today = str(yesterday)
+        print(today)
         #print(today)
         datem = datetime.datetime.strptime(today, "%Y-%m-%d")
         #print(type(datem.day))
+        print("self.day",self.day,self.month)
+        print()
         if datem.day==self.day and datem.month==self.month and datem.year==self.year:
             return True
         else:
-            return False 
+            return False
         
         
