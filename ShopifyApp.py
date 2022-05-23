@@ -88,15 +88,20 @@ class Shopify:
             date_=Date_(date_inword)
             date_.convert_date_in_numbers()
             if date_.match_date() == True:
-                activity=r[2].split('\n')[1]
+                if len(r[2].split('\n'))==2:
+                    activity=r[2].split('\n')[1]
+                else:
+                    activity=r[2]
                 WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.LINK_TEXT,r[1]))).click()
                 element=self.driver.find_element_by_xpath('//*[@id="AppFrameMain"]/div/div/div[2]/div/section[1]/div[3]/p[1]/a')
                 list_activity[activity].append(element.text)
                 self.driver.execute_script("window.history.go(-1)")
                 time.sleep(1)
-            else:
                 finish=True
-                break 
+            elif finish==False:
+                continue
+            else:
+                break
         return list_activity
         
     def open_workplace(self):
