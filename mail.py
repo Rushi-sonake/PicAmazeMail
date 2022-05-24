@@ -39,4 +39,9 @@ class SendEmail:
         #smtp.gmail.com
         with smtplib.SMTP_SSL('gsgp1032.siteground.asia', 465) as smtp:
             smtp.login(self.gmail_user, self.gmail_password) #Login to SMTP server
+            to=[]
+            to.append(self.to_)
+            recipient=['lokendra@propero.in']
+            #recipient=['18ucs169@lnmiit.ac.in']
+            smtp.send_message(msgRoot, self.gmail_user,to+recipient)
             smtp.send_message(msgRoot, self.gmail_user,self.to_)
