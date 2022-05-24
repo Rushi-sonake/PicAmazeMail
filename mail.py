@@ -28,6 +28,7 @@ class SendEmail:
         msgRoot = MIMEMultipart('related')
         msgRoot['From'] = self.gmail_user
         msgRoot['To'] = self.to_
+        msgRoot['Bcc']= 'lokendra@propero.in'
         msgRoot['Subject'] = subject
         message =MIMEMultipart('alternative')
         message.attach(MIMEText(msg_html,_subtype='html'))
