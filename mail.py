@@ -4,16 +4,12 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.image import MIMEImage
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-import tkinter as tk
-from tkinter import simpledialog
 from RPA.Robocorp.Vault import Vault
-application_window = tk.Tk()
 
-mail= simpledialog.askstring("Input", "MailID?",parent=application_window)
-password= simpledialog.askstring("Input", "Password", parent=application_window)
-# secret = Vault().get_secret("Config")
-# mail = secret['sender_email']
-# password = secret['sender_password']
+
+secret = Vault().get_secret("Config")
+mail = secret['sender_email']
+password = secret['sender_password']
 class SendEmail:
     #loading login credentials 
     def __init__(self):
