@@ -14,7 +14,8 @@ def main():
         print(mail_to)
         subject="Thank you for joining our club"
         file=None
-        to_= mail_to
+        #to_= mail_to
+        to_='vaishrishika@gmail.com'
         msg=mail.create_msg(file, installation_mail ,subject,to_)
         mail.send_mail(msg)
         
@@ -22,7 +23,8 @@ def main():
         print(mail_to)
         subject='Let’s stay in touch!'
         file=None
-        to_= mail_to
+        to_='vaishrishika@gmail.com'
+        #to_= mail_to
         msg=mail.create_msg(file, uninstallation_mail, subject,to_)
         mail.send_mail(msg)
         
@@ -30,7 +32,8 @@ def main():
         print(mail_to)
         subject="Canceled?"
         file=None
-        to_= mail_to
+        to_='vaishrishika@gmail.com'
+        #to_= mail_to
         msg=mail.create_msg(file, cancel_recurring_charge, subject,to_)
         mail.send_mail(msg)
 
