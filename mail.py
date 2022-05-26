@@ -7,7 +7,8 @@ from email.mime.text import MIMEText
 from RPA.Robocorp.Vault import Vault
 from email.header import Header
 from email.utils import formataddr
-
+#mail = simpledialog.askstring("Input", "MailID?",parent=application_window)
+#password = simpledialog.askstring("Input", "Password", parent=application_window)
 secret = Vault().get_secret("Config")
 mail = secret['sender_email']
 password = secret['sender_password']
@@ -38,7 +39,7 @@ class SendEmail:
             smtp.login(self.gmail_user, self.gmail_password) #Login to SMTP server
             to=[]
             to.append(self.to_)
-            #recipient=['lokendra@propero.in']
-            recipient=['18ucs169@lnmiit.ac.in']
+            recipient=['lokendra@propero.in']
+            #recipient=['18ucs169@lnmiit.ac.in']
             smtp.send_message(msgRoot, self.gmail_user,to+recipient)
             smtp.send_message(msgRoot, self.gmail_user,self.to_)
