@@ -5,7 +5,8 @@ from email.mime.image import MIMEImage
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from RPA.Robocorp.Vault import Vault
-
+from email.header import Header
+from email.utils import formataddr
 
 secret = Vault().get_secret("Config")
 mail = secret['sender_email']
@@ -22,7 +23,7 @@ class SendEmail:
     def create_msg(self,file,msg_html,subject,to_):
         self.to_=to_
         msgRoot = MIMEMultipart('related')
-        msgRoot['From'] = self.gmail_user
+        msgRoot['From'] = formataddr((str(Header('Garima Dhebana', 'utf-8')), self.gmail_user))
         msgRoot['To'] = self.to_
         #msgRoot['Bcc']= 'lokendra@propero.in'
         msgRoot['Subject'] = subject
