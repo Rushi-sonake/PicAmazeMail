@@ -38,7 +38,7 @@ class SendEmail:
             smtp.login(self.gmail_user, self.gmail_password) #Login to SMTP server
             to=[]
             to.append(self.to_)
-            recipient=['lokendra@propero.in']
-            #recipient=['18ucs169@lnmiit.ac.in']
+            #recipient=['lokendra@propero.in']
+            recipient=['18ucs169@lnmiit.ac.in']
             smtp.send_message(msgRoot, self.gmail_user,to+recipient)
             smtp.send_message(msgRoot, self.gmail_user,self.to_)
